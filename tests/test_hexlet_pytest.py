@@ -1,5 +1,34 @@
 from hexlet_pytest import __version__
+import pytest
 
 
 def test_version():
     assert __version__ == '0.1.0'
+
+
+def test_stack():
+    stack = []
+    # Добавляем два элемента в стек и затем извлекаем их
+    # Почему два? Так надежнее, чем один, а три скорее всего избыточно
+    stack.append('one')
+    stack.append('two')
+
+    assert stack.pop() == 'two'
+    assert stack.pop() == 'one'
+
+
+def test_emptiness():
+    stack = []
+    assert not stack
+    stack.append('one')
+    assert bool(stack)  # not not stack
+
+    stack.pop()
+    assert not stack
+
+
+
+def test_pop_with_empty_stack():
+    stack = []
+    with pytest.raises(IndexError):
+        stack.pop()
